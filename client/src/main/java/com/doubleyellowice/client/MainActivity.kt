@@ -1,4 +1,4 @@
-package com.example.binderdemo
+package com.doubleyellowice.client
 
 import android.content.ComponentName
 import android.content.Intent
@@ -11,19 +11,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.doubleyellowice.client.ui.theme.BinderDemoTheme
 import com.example.binderdemo.aidl.UserManager
 import com.example.binderdemo.model.User
-import com.example.binderdemo.ui.theme.BinderDemoTheme
 
 class MainActivity : ComponentActivity() {
-
     private var userManager: UserManager? = null
 
     private val connection: ServiceConnection = object : ServiceConnection {
@@ -42,12 +39,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(onClick = { bindService() }) {
-                    Text(text = "Bind Service")
+            BinderDemoTheme {
+                // A surface container using the 'background' color from the theme
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Button(onClick = { bindService() }) {
+                        Text(text = "Bind Service")
+                    }
                 }
             }
         }
@@ -62,21 +62,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(
-    modifier: Modifier = Modifier,
-) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(
-            text = "Binder服务端",
-            modifier = modifier
-        )
-    }
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     BinderDemoTheme {
-        Greeting()
+        Greeting("Android")
     }
 }

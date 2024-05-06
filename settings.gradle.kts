@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "BinderDemo"
 include(":app")
+include(":client")
